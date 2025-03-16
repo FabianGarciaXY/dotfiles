@@ -119,11 +119,11 @@ eval "$(oh-my-posh init bash --config ~/.config/extra_bubbles.omp.json)"
 # eval "$(oh-my-posh init bash --config ~/.config/bubbles.omp.json)"
 
 ################### aliases ###################
-my_workspace="/home/$NAME/code/"
+export WORKSPACE="/home/$NAME/code/"
 
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias gitc="git --git-dir=${my_workspace}arkon-workflows-components/.git --work-tree=${my_workspace}arkon-workflows-components"
-alias gitw="git --git-dir=${my_workspace}arkon-workflows/.git --work-tree=${my_workspace}arkon-workflows"
-alias gitbp="git --git-dir=${my_workspace}arkon-business_processes/.git --work-tree=${my_workspace}arkon-business_processes"
+alias gitc="git --git-dir=${WORKSPACE}arkon-workflows-components/.git --work-tree=${WORKSPACE}arkon-workflows-components"
+alias gitw="git --git-dir=${WORKSPACE}arkon-workflows/.git --work-tree=${WORKSPACE}arkon-workflows"
+alias gitbp="git --git-dir=${WORKSPACE}arkon-business_processes/.git --work-tree=${WORKSPACE}arkon-business_processes"
 
 
