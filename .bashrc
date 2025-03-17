@@ -113,7 +113,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 alias lzd='lazydocker'
 
 # eval "$(thefuck --alias)"
-eval "$(oh-my-posh init bash --config ~/.config/extra_bubbles.omp.json)"
+eval "$(oh-my-posh init bash --config ~/.config/omp/extra_bubbles.omp.json)"
 # eval "$(oh-my-posh init bash --config ~/.config/_shell.omp.json)"
 # eval "$(oh-my-posh init bash --config ~/.config/amro.omp.json)"
 # eval "$(oh-my-posh init bash --config ~/.config/bubbles.omp.json)"
