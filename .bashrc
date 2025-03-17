@@ -65,6 +65,50 @@ xterm*|rxvt*)
     ;;
 esac
 
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
+
+export WORKSPACE="/home/$NAME/code/"
+export JAVA_HOME=$JAVA_HOME:/root/.sdkman/candidates/java/current
+export PATH=$PATH:/usr/local/share/neovim/bin:/root/.config/go_1_24/bin/:/root/.config/Hilbish/:$HOME/.local/bin/:/root/.sdkman/candidates/java/current/bin
+. "$HOME/.cargo/env"
+. "$HOME/.atuin/bin/env"
+
+################### Starship ###################
+eval "$(starship init bash)"
+
+################### OhMyPosh ###################
+# eval "$(oh-my-posh init bash --config ~/.config/omp/extra_bubbles.omp.json)"
+# eval "$(oh-my-posh init bash --config ~/.config/_shell.omp.json)"
+# eval "$(oh-my-posh init bash --config ~/.config/amro.omp.json)"
+# eval "$(oh-my-posh init bash --config ~/.config/bubbles.omp.json)"
+
+################### Atuin ###################
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
+
+################### aliases ###################
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+alias lzd='lazydocker'
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias components="git --git-dir=${WORKSPACE}arkon-workflows-components/.git --work-tree=${WORKSPACE}arkon-workflows-components"
+alias workflows="git --git-dir=${WORKSPACE}arkon-workflows/.git --work-tree=${WORKSPACE}arkon-workflows"
+alias process="git --git-dir=${WORKSPACE}arkon-business_processes/.git --work-tree=${WORKSPACE}arkon-business_processes"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -77,53 +121,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
-
-export JAVA_HOME=$JAVA_HOME:/root/.sdkman/candidates/java/current
-export PATH=$PATH:/usr/local/share/neovim/bin:/root/.config/go_1_24/bin/:/root/.config/Hilbish/:$HOME/.local/bin/:/root/.sdkman/candidates/java/current/bin
-. "$HOME/.cargo/env"
-
-. "$HOME/.atuin/bin/env"
-
-[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
-eval "$(atuin init bash)"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+################### SdkMan ###################
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-alias lzd='lazydocker'
-
-# eval "$(thefuck --alias)"
-eval "$(oh-my-posh init bash --config ~/.config/omp/extra_bubbles.omp.json)"
-# eval "$(oh-my-posh init bash --config ~/.config/_shell.omp.json)"
-# eval "$(oh-my-posh init bash --config ~/.config/amro.omp.json)"
-# eval "$(oh-my-posh init bash --config ~/.config/bubbles.omp.json)"
-
-################### aliases ###################
-export WORKSPACE="/home/$NAME/code/"
-
-alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias gitc="git --git-dir=${WORKSPACE}arkon-workflows-components/.git --work-tree=${WORKSPACE}arkon-workflows-components"
-alias gitw="git --git-dir=${WORKSPACE}arkon-workflows/.git --work-tree=${WORKSPACE}arkon-workflows"
-alias gitbp="git --git-dir=${WORKSPACE}arkon-business_processes/.git --work-tree=${WORKSPACE}arkon-business_processes"
-
-

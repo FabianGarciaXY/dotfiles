@@ -49,10 +49,10 @@ blink_interval = 400
 blinking = "Always"
 
 [font]
-normal.family = "Cascadia Code"
-normal.style = "Bold Italic"
-size = 11.6
-italic.style = "italic"
+# normal.family = "Cascadia Code"
+normal.family = "FiraCode Nerd Font Mono"
+size = 11.5
+normal.style = "SemiBold"
 
 [scrolling]
 history = 5000
