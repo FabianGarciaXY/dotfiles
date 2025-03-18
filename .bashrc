@@ -108,6 +108,7 @@ alias process="git --git-dir=${WORKSPACE}arkon-business_processes/.git --work-tr
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias neovide="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command 'neovide --wsl --neovim-bin /usr/local/share/neovim/bin/nvim'"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
