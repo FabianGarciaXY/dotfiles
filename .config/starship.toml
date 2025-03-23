@@ -7,7 +7,7 @@ add_newline = false
 
 # Disable the package module, hiding it from the prompt completely
 [package]
-disabled = true
+disabled = false
 format = "[$symbol ]($style)"
 
 [nodejs]
@@ -80,3 +80,6 @@ format = """
 [╰─$symbol](fg:current_line) """
 success_symbol = '[λ](fg:bold white)'
 error_symbol = '[×](fg:bold red)'
+
+[directory]
+style = "bold red"

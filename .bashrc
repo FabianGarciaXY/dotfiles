@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+################################## Start Blue Sh ##################################
+[[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --attach=none
+################################## End Blue Sh ##################################
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -72,11 +76,47 @@ esac
 #    . /etc/bash_completion
 #fi
 
+export EDITOR="/usr/local/share/neovim_11/bin/nvim -u /root/.config/nvim/min-init.vim"
 export WORKSPACE="/home/$NAME/code/"
 export JAVA_HOME=$JAVA_HOME:/root/.sdkman/candidates/java/current
 export PATH=$PATH:/usr/local/share/neovim/bin:/root/.config/go_1_24/bin/:/root/.config/Hilbish/:$HOME/.local/bin/:/root/.sdkman/candidates/java/current/bin
 . "$HOME/.cargo/env"
 . "$HOME/.atuin/bin/env"
+
+################### aliases ###################
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+alias lzd='lazydocker'
+alias lzg='lazygit'
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias components="git --git-dir=${WORKSPACE}arkon-workflows-components/.git --work-tree=${WORKSPACE}arkon-workflows-components"
+alias workflows="git --git-dir=${WORKSPACE}arkon-workflows/.git --work-tree=${WORKSPACE}arkon-workflows"
+alias process="git --git-dir=${WORKSPACE}arkon-business_processes/.git --work-tree=${WORKSPACE}arkon-business_processes"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias neovide="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command 'neovide --wsl --neovim-bin /usr/local/share/neovim/bin/nvim'"
+alias min-neovim="/usr/local/share/neovim_11/bin/nvim -u /root/.config/nvim/min-init.vim"
+alias c="clear"
+alias cls="clear"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 ################### Starship ###################
 eval "$(starship init bash)"
@@ -91,39 +131,31 @@ eval "$(starship init bash)"
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 eval "$(atuin init bash)"
 
-################### aliases ###################
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-alias lzd='lazydocker'
-alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
-alias components="git --git-dir=${WORKSPACE}arkon-workflows-components/.git --work-tree=${WORKSPACE}arkon-workflows-components"
-alias workflows="git --git-dir=${WORKSPACE}arkon-workflows/.git --work-tree=${WORKSPACE}arkon-workflows"
-alias process="git --git-dir=${WORKSPACE}arkon-business_processes/.git --work-tree=${WORKSPACE}arkon-business_processes"
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias neovide="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command 'neovide --wsl --neovim-bin /usr/local/share/neovim/bin/nvim'"
-alias min-neovim="/usr/local/share/neovim_11/bin/nvim -u /root/.config/nvim/min-init.vim"
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+ble/util/import/eval-after-load core-complete '
+  ble/array#remove _ble_complete_auto_source atuin-history'
+################### Zoxide ###################
+eval "$(zoxide init bash)"
 
 ################### SdkMan ###################
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+. "$HOME/.local/bin/env"
+
+################################## END LOGS ##################################
+eval "$(mise activate bash)"
+
+# pnpm
+export PNPM_HOME="/root/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+################################## Start Blue Sh ##################################
+[[ ! ${BLE_VERSION-} ]] || ble-attach
+################################## End Blue Sh ##################################
+
+bind 'TAB:menu-complete'

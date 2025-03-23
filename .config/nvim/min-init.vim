@@ -25,7 +25,7 @@ set smartindent
 " switching between splits etc.
 set mouse=a
 " set rnu
-set nu
+" set nu
 set nowrap
 " Turns of highlighting after a seach is done.
 set nohlsearch

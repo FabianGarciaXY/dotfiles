@@ -12,7 +12,7 @@ vim.opt.clipboard:append('unnamedplus')
 vim.opt.wrap = false
 vim.opt.encoding = 'utf-8'
 vim.opt.guicursor = 'n:block-blinkwait400-blinkon400-blinkoff400,i:ver25-blinkwait400-blinkon400-blinkoff400' -- Cursor settings
-vim.opt.guifont = 'Cascadia Code:h11'
+vim.opt.guifont = 'FiraCode Nerd Font Mono:h11'
 vim.opt.cursorline = true
 
 -- Show messages
